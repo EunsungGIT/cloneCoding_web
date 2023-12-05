@@ -1,0 +1,42 @@
+/* header */
+header {}
+header  h1 {}
+header  h1 a {}
+header  h1 a img {}
+header  nav {}
+header  nav .active {}
+header  nav a {}
+header  .head_right {}
+header  .head_right a {}
+
+/* main */
+main {}
+main .path {}
+main .path dd {}
+main .path dd a {}
+main .path dd em {}
+main h1 {}
+main p {}
+main .bg {}
+main .bg p {}
+main .vision {}
+main .vision h2 {}
+main .vision p {}
+main .goal_strategy {}
+main .goal_strategy h2 {}
+main .goal_strategy h2 ul {}
+main .goal_strategy h2 ul .first {}
+main .goal_strategy h2 ul li {}
+main .goal_strategy h2 ul .last {}
+main .goal_strategy h2 ul li h3 {}
+main .goal_strategy h2 ul li p {}
+
+/* header */
+footer {}
+footer .top {}
+footer .top .left {}
+footer .top .left a{}
+footer .top .right {}
+footer .top .right a {}
+footer address {}
+footer p {}
