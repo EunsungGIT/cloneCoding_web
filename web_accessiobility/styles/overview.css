@@ -23,6 +23,9 @@ main .title_path .path dd em {
     font-weight: 500;
 }
 main .contents {
+    background-image: url(/web_accessiobility/images/bg.png);
+    background-repeat: no-repeat;
+    background-position: right top;
     padding: 50px 20px 50px 20px;
 }
 main .contents h2 {
