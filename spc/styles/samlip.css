@@ -1,21 +1,27 @@
 /* header */
 header {
+    height: 92px;
     padding: 0 50px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
 }
 header  h1 {}
 header  h1 a {}
 header  h1 a img {width: 60px;}
-header  nav {text-align: center;}
-header  nav .active {color: #36b4e5;}
-header  nav a {}
-header  .head_right {
-    text-align: right;
-    padding: 10px 0 0 0;
+header  nav {}
+header  nav .active {
+    margin: 0;
+    color: #36b4e5;
 }
-header  .head_right a {
+header  nav a {margin: 0 0 0 20px;}
+header  .head_right {}
+header  .head_right a {}
+header .head_right a:nth-child(1) {
+    border-right: 1px solid #aaa;
     margin: 0 20px 0 0;
     padding: 0 20px 0 0;
-
 }
 
 /* main */
@@ -99,17 +105,22 @@ main .goal_strategy ul li h3 {font-size: 1.125rem;}
 main .goal_strategy ul li p {line-height: 1.5;}
 
 /* header */
-footer {
-    margin: 0 50px;
-    padding: 53px 0;
+footer {padding: 53px 50px;}
+footer .top {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
 }
-footer .top {}
 footer .top .left {}
 footer .top .left a{
     margin: 0 20px 0 0;
     font-weight: 700;
 }
-footer .top .right {text-align: right;}
-footer .top .right a {border: 1px solid #aaa;}
-footer address {}
-footer .copyright {margin: 30px 0 0 0;}
+footer .top .right {}
+footer .top .right a {
+    border: 1px solid #aaa;
+    padding: 5px 15px;
+    display: inline-block;
+}
+footer address {margin: 30px 0;}
+footer .copyright {}
