@@ -81,4 +81,60 @@ header .bottom .right .weather p {font-size: 0.8125rem;}
 /* main6행-새소식 */
 /* footer*/
 /* footer-1행*/
+footer {
+    width: 1151px;
+    margin: 0 auto;
+}
+footer .top {
+    display: flex; flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    height: 67px;
+    border-top: 1px solid #aaa;
+}
+footer .top .menu {}
+footer .top .menu a {margin-right: 16px;}
+footer .top .menu a em {font-weight: 700;}
+footer .top .sns {
+    display: flex; flex-flow: row nowrap;
+    justify-content: flex-end;
+    align-items: center;
+}
+footer .top .sns a {
+    margin-right: 16px;
+    display: block;
+    background-image: url(../images/icon_sns2/icon_sns2.png);
+    background-repeat: no-repeat;
+    width: 25px; height: 25px; text-indent: -9999px;
+}
+footer .top .sns a:nth-child(1) {}
+footer .top .sns a:nth-child(2) {background-position-x: -25px;}
+footer .top .sns a:nth-child(3) {background-position-x: -50px;}
+footer .top .sns a:nth-child(4) {background-position-x: -75px;}
+footer .top .sns a:nth-child(5) {background-position-x: -100px;}
+footer .top .sns a:nth-child(6) {
+    background-position-x: -125px;
+    margin: 0;
+}
+footer .top .sns a:hover {background-position-y: -25px;}
 /* footer-2행*/
+footer .bottom {
+    display: flex; flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    height: 105px;
+    border-top: 1px solid #aaa;
+}
+footer .bottom .left {
+    display: flex; flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+footer .bottom .left p {margin-right: 16px;}
+footer .bottom .left p img {}
+footer .bottom .left address {
+    font-size: 0.813rem;
+}
+footer .bottom .banner {}
+footer .bottom .banner a {}
+footer .bottom .banner a img {margin-left: 16px;}
