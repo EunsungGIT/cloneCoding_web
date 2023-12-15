@@ -1,3 +1,4 @@
+* {transition: all 0.5s;}
 /* header */
 header {
     font-family: 'Noto Sans KR';
@@ -21,7 +22,6 @@ main {
     font-family: 'Noto Sans KR';
 }
 main .visual {
-    background-color: green;
     height: 650px; overflow: hidden; position: relative;
 }
 main .visual video {width: 100%;}
