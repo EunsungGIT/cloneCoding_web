@@ -57,9 +57,93 @@ shipping_info_open_close.addEventListener('click', function(){
 
 const delivery_menu = item_detail.querySelector('.benefit_shipping dd:nth-of-type(2) .delivery_menu')
 const delivery_menu_open = item_detail.querySelector('.benefit_shipping dd:nth-of-type(2) .delivery_menu_open')
-console.log(delivery_menu, delivery_menu_open)
+const delivery_menu_icon = delivery_menu.querySelector('i[class$=down]')
+console.log(delivery_menu, delivery_menu_open, delivery_menu_icon)
 delivery_menu_open.style.display = 'none'
 
 delivery_menu.addEventListener('click', function(){
-    delivery_menu_open.style.display = 'block'
+    delivery_menu_open.style.display = 'block';
+    delivery_menu.style.borderBottomLeftRadius = '0';
+    delivery_menu.style.borderBottomRightRadius = '0';
+    delivery_menu_icon.style.transform = 'scaleY(-1)';
+})
+
+//상품 색상, 사이즈 옵션을 선택했을 때 선택 정보가 selectResult에 결과값으로 출력되고 num_result의 구매수량에 따라 order_price에 가격이 출력되는 결과
+//---------------------------------------------------------
+//상세절차 : 상품 색상, 사이즈 옵션을 선택했을 때
+//1. 색상(옵션1) 선택 전 사이즈(옵션2) 비활성화
+//2. 옵션1 선택 시 옵션2 활성화
+//3. 옵션1 선택 후 옵션2 클릭 시 결과 출력
+//3-1. (위) 조건 달성 기준 결과 출력이 되어있는 상태라면 같은 옵션 클릭 시 중복 데이터 결과 팝업 출력
+//3-2. (위) 조건 달성 기준 결과 출력과 다른 옵션을 클릭 시 추가 데이터 기존 데이터 (아래) 출력
+//3-3. (위) 조건 달성 기준 옵션1, 옵션2의 선택 데이터는 초기화됨.
+const colorOpt = document.querySelector('#colorOpt');
+const sizeOpt = document.querySelector('#sizeOpt');
+const selectResult = document.querySelector('.selectResult')
+console.log(colorOpt, sizeOpt);
+console.log(colorOpt.options[1].value);
+console.log(colorOpt.options[1].value.text);
+selectResult.style.display = 'none';
+
+//colorOpt, sizeOpt text 데이터를 모두 변수로 수집 후
+//creatElement, appendChild를 이용해서 opt1, opt2 선택 데이터 출력하기
+const optResult1 = document.createElement('span');
+const optResult2 = document.createElement('span');
+const resultView = document.querySelectorAll('.item_detail .right_container #itemFrm fieldset .selectResult .opt_list span')
+console.log(optResult1, optResult2, resultView)
+const num_count = selectResult.querySelector('#num_count')
+const order_price = selectResult.querySelector('.order_price')
+const priceTotalView = document.querySelector('fieldset:nth-child(2) .order_price')
+let num = 1;
+let price = 36900;
+console.log(num_count, order_price)
+
+colorOpt.addEventListener('change', function(){
+    console.log(colorOpt.options[colorOpt.selectedIndex].text)
+    optResult1.innerHTML = colorOpt.options[colorOpt.selectedIndex].text
+})
+sizeOpt.addEventListener('change', function(){
+    //선택 option 데이터 저장하기
+    console.log(sizeOpt.options[sizeOpt.selectedIndex].text)
+    optResult2.innerHTML = sizeOpt.options[sizeOpt.selectedIndex].text
+    //선택옵션 부모 보이기
+    selectResult.style.display = 'grid';
+    //선택옵션 적용 대상에 위 option데이터값 출력하기
+    resultView[0].appendChild(optResult1)
+    resultView[1].appendChild(optResult2)
+    //선택옵션의 수량(num) 출력하기
+    num_count.value = num
+    //선택옵션의 가격(price) 출력하기
+    order_price.innerHTML = price.toLocaleString('ko-kr') + '원'
+    priceTotalView.innerHTML = price.toLocaleString('ko-kr') + '원'
+})
+
+//selectResult 안 X 클릭 시 X의 부모(selecResult)를 DOM관계로 선택해서 숨기기
+const close = selectResult.querySelector('.close')
+close.addEventListener('click', function(){
+    close.parentElement.style.display = 'none';
+})
+
+//수량 -, + 버튼 클릭 시 수량값이 변경되며 그에 따라 가격 변동
+const plus = selectResult.querySelector('#plus')
+const minus = selectResult.querySelector('#minus')
+let total = 0
+console.log(plus, minus)
+console.log(typeof num_count.value)
+
+plus.addEventListener('click', function(){
+    //1. 수량 1 증가
+    //1-1. 수량 1 증가한 값 표시
+    num += 1;
+    num_count.value = num
+    total = num*price;
+    order_price.innerHTML = total.toLocaleString('ko-kr') + '원'
+    priceTotalView.innerHTML = total.toLocaleString('ko-kr') + '원'
+})
+minus.addEventListener('click', function(){
+    num -= 1;
+    num_count.value = num
+    total = num*price;
+    order_price.innerHTML = total.toLocaleString('ko-kr') + '원'
+    priceTotalView.innerHTML = total.toLocaleString('ko-kr') + '원'
 })
