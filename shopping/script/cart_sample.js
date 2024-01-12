@@ -32,9 +32,16 @@ const price_info = item_detail.querySelector('.price i[class$=info]')
 const price_info_open = item_detail.querySelector('.price .open')
 console.log(price_info, price_info_open)
 price_info_open.style.display = 'none'
+let price_info_open_status = false
 
 price_info.addEventListener('click', function(){
-    price_info_open.style.display = 'block'
+    if(price_info_open_status == false){
+        price_info_open.style.display = 'block'
+        price_info_open_status = !price_info_open_status
+    }else{
+        price_info_open.style.display = 'none'
+        price_info_open_status = !price_info_open_status
+    }
 })
 
 //내일 출발 i 클릭 시 팝업 출력하고 팝업 내 X 클릭 시 팝업 닫히기 JS
@@ -46,14 +53,20 @@ const shipping_info_open = item_detail.querySelector('.benefit_shipping dd:nth-o
 const shipping_info_open_close = item_detail.querySelector('.benefit_shipping dd:nth-of-type(2) > span span .open .close')
 console.log(shipping_info, shipping_info_open, shipping_info_open_close)
 shipping_info_open.style.display = 'none'
+let shipping_info_open_status = false
 
 shipping_info.addEventListener('click', function(){
-    shipping_info_open.style.display = 'block'
+    if(shipping_info_open_status == false){
+        shipping_info_open.style.display = 'block'
+        shipping_info_open_status = !shipping_info_open_status
+    }else{
+        shipping_info_open.style.display = 'none'
+        shipping_info_open_status = !shipping_info_open_status
+    }
 })
 shipping_info_open_close.addEventListener('click', function(){
     shipping_info_open.style.display = 'none'
 })
-
 
 const delivery_menu = item_detail.querySelector('.benefit_shipping dd:nth-of-type(2) .delivery_menu')
 const delivery_menu_open = item_detail.querySelector('.benefit_shipping dd:nth-of-type(2) .delivery_menu_open')
@@ -61,11 +74,23 @@ const delivery_menu_icon = delivery_menu.querySelector('i[class$=down]')
 console.log(delivery_menu, delivery_menu_open, delivery_menu_icon)
 delivery_menu_open.style.display = 'none'
 
+let delivery_menu_open_status = false //현재 상태 변수(false==숨김)
 delivery_menu.addEventListener('click', function(){
-    delivery_menu_open.style.display = 'block';
-    delivery_menu.style.borderBottomLeftRadius = '0';
-    delivery_menu.style.borderBottomRightRadius = '0';
-    delivery_menu_icon.style.transform = 'scaleY(-1)';
+    if(delivery_menu_open_status == false){
+        console.log(delivery_menu_open_status)//open
+        delivery_menu_open.style.display = 'block';
+        delivery_menu.style.borderBottomLeftRadius = '0';
+        delivery_menu.style.borderBottomRightRadius = '0';
+        delivery_menu_icon.style.transform = 'scaleY(-1)';
+        delivery_menu_open_status = !delivery_menu_open_status
+    }else{
+        console.log(delivery_menu_open_status)
+        delivery_menu_open.style.display = 'none';
+        delivery_menu.style.borderBottomLeftRadius = '5px';
+        delivery_menu.style.borderBottomRightRadius = '5px';
+        delivery_menu_icon.style.transform = 'scaleY(1)';
+        delivery_menu_open_status = !delivery_menu_open_status
+    }
 })
 
 //상품 색상, 사이즈 옵션을 선택했을 때 선택 정보가 selectResult에 결과값으로 출력되고 num_result의 구매수량에 따라 order_price에 가격이 출력되는 결과
@@ -85,6 +110,8 @@ console.log(colorOpt.options[1].value);
 console.log(colorOpt.options[1].value.text);
 selectResult.style.display = 'none';
 
+sizeOpt.disabled = true; //size select 비활성화
+
 //colorOpt, sizeOpt text 데이터를 모두 변수로 수집 후
 //creatElement, appendChild를 이용해서 opt1, opt2 선택 데이터 출력하기
 const optResult1 = document.createElement('span');
@@ -99,6 +126,7 @@ let price = 36900;
 console.log(num_count, order_price)
 
 colorOpt.addEventListener('change', function(){
+    sizeOpt.disabled = false
     console.log(colorOpt.options[colorOpt.selectedIndex].text)
     optResult1.innerHTML = colorOpt.options[colorOpt.selectedIndex].text
 })
@@ -108,6 +136,7 @@ sizeOpt.addEventListener('change', function(){
     optResult2.innerHTML = sizeOpt.options[sizeOpt.selectedIndex].text
     //선택옵션 부모 보이기
     selectResult.style.display = 'grid';
+    selectResult_status = true
     //선택옵션 적용 대상에 위 option데이터값 출력하기
     resultView[0].appendChild(optResult1)
     resultView[1].appendChild(optResult2)
@@ -122,6 +151,7 @@ sizeOpt.addEventListener('change', function(){
 const close = selectResult.querySelector('.close')
 close.addEventListener('click', function(){
     close.parentElement.style.display = 'none';
+    selectResult_status = false
 })
 
 //수량 -, + 버튼 클릭 시 수량값이 변경되며 그에 따라 가격 변동
@@ -130,20 +160,45 @@ const minus = selectResult.querySelector('#minus')
 let total = 0
 console.log(plus, minus)
 console.log(typeof num_count.value)
+num_count.value = num
 
-plus.addEventListener('click', function(){
+//최소 구매 수량1, 최대 구매 수량7
+//최소 구매 수량입니다.
+//재고 7개로 더 구매할 수 없습니다.
+plus.addEventListener('click', ()=>{
     //1. 수량 1 증가
     //1-1. 수량 1 증가한 값 표시
-    num += 1;
-    num_count.value = num
-    total = num*price;
+    if(num < 7){
+        num++
+        num_count.value = num
+        total = num*price;
+    }else{
+        alert('재고 7개로 더 구매할 수 없습니다.')
+    }
     order_price.innerHTML = total.toLocaleString('ko-kr') + '원'
     priceTotalView.innerHTML = total.toLocaleString('ko-kr') + '원'
 })
-minus.addEventListener('click', function(){
-    num -= 1;
-    num_count.value = num
-    total = num*price;
+minus.addEventListener('click', ()=>{
+    if(num > 1){
+        num--
+        num_count.value = num
+        total = num*price;
+    }else{
+        alert('최소 구매 수량입니다.')
+    }
     order_price.innerHTML = total.toLocaleString('ko-kr') + '원'
     priceTotalView.innerHTML = total.toLocaleString('ko-kr') + '원'
+})
+
+//장바구니, 바로구매
+const cartBtn = document.querySelector('#cart')
+const buyBtn = document.querySelector('#buy')
+let selectResult_status = false
+
+cartBtn.addEventListener('click', ()=>{
+    if(selectResult_status == false){
+        alert('상품을 선택해주세요')
+    }else{
+        alert('장바구니에 담겼습니다')
+    }
 })
