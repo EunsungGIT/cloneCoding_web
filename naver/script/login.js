@@ -17,19 +17,30 @@ console.log(qr_login_container)
 // 초기 일회용, QR 내용 숨기기
 disposable_login_container.style.display = 'none'
 qr_login_container.style.display = 'none'
+// 초기값 ID로그인 활성화 시키기 (acitve) *클릭 전
+login_title[0].parentElement.classList.add('active')
 
 login_title[0].addEventListener('click', ()=>{
     id_login_container.style.display = 'block'
     disposable_login_container.style.display = 'none'
     qr_login_container.style.display = 'none'
+    login_title[0].parentElement.classList.add('active')
+    login_title[1].parentElement.classList.remove('active')
+    login_title[2].parentElement.classList.remove('active')
 })
 login_title[1].addEventListener('click', ()=>{
     id_login_container.style.display = 'none'
     disposable_login_container.style.display = 'block'
     qr_login_container.style.display = 'none'
+    login_title[0].parentElement.classList.remove('active')
+    login_title[1].parentElement.classList.add('active')
+    login_title[2].parentElement.classList.remove('active')
 })
 login_title[2].addEventListener('click', ()=>{
     id_login_container.style.display = 'none'
     disposable_login_container.style.display = 'none'
     qr_login_container.style.display = 'block'
+    login_title[0].parentElement.classList.remove('active')
+    login_title[1].parentElement.classList.remove('active')
+    login_title[2].parentElement.classList.add('active')
 })

@@ -1,0 +1,43 @@
+/* ----javascript classList 호출 클래스 모음---- */
+/* 로그인 탭 제목 클릭 시 활성화 active */
+#login_wrap main #loginFrm fieldset .login_title .active {
+    /* 탭 제목 활성화 대상 */
+    position: relative; z-index: 999;
+    background-color: #fff; border-bottom-color: #fff;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+#login_wrap main #loginFrm fieldset .login_title .active::after {
+    background: url(../images/m_sp_login.png);
+    display: inline-block; content: '';
+    position: absolute; top: -2px;
+    width: 14px; height: 59px;
+    background-size: 251px 210px;
+}
+
+#login_wrap main #loginFrm fieldset .login_title .active:nth-child(1)::after {
+    background-position: 0 -129px; right: -5px;
+}
+#login_wrap main #loginFrm fieldset .login_title .active:nth-child(2)::before {
+    width: 14px; height: 59px;
+    background: url(../images/m_sp_login.png) -16px -129px;
+    display: inline-block; content: '';
+    position: absolute; top: -2px; left: -10px;
+    background-size: 251px 210px;
+}
+#login_wrap main #loginFrm fieldset .login_title .active:nth-child(2)::after {
+    background-position: 0 -129px; z-index: 999; right: -8px;
+}
+#login_wrap main #loginFrm fieldset .login_title .active:nth-child(3)::after {
+    background-position: -16px -129px; left: -8px;
+}
+
+#login_wrap main #loginFrm fieldset .login_title .active:nth-child(1) a span::before {
+    background-position-y: -100px;
+}
+#login_wrap main #loginFrm fieldset .login_title .active:nth-child(2) a > span::before {
+    background-position-y: -138px;
+}
+#login_wrap main #loginFrm fieldset .login_title .active:nth-child(3) a > em:first-child::before {
+    background-position-y: -44px;
+}

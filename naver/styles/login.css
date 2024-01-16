@@ -19,20 +19,6 @@
     border-bottom-right-radius: 0;
     display: flex; justify-content: center; align-items: center;
 }
-#login_wrap main #loginFrm fieldset .login_title .active {
-    /* 탭 제목 활성화 대상 */
-    position: relative;
-    background-color: #fff; border-bottom-color: #fff;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
-#login_wrap main #loginFrm fieldset .login_title .active::after {
-    background: yellow url(../images/m_sp_login.png) 0 -156px;
-    display: inline-block; content: '';
-    position: absolute; top: -1px; right: -5px;
-    width: 15px; height: 60px;
-    background-size: 266px 252px;
-}
 #login_wrap main #loginFrm fieldset .login_title h2:last-child {
     border-top-right-radius: 5px; position: relative;
 }
@@ -49,8 +35,8 @@
     margin-right: 5px;
     transform: translateY(2px);
 }
-#login_wrap main #loginFrm fieldset .login_title .active a span::before {
-    background-position-y: -100px;
+#login_wrap main #loginFrm fieldset .login_title h2:nth-child(1) a span::before {
+    background-position-y: -194px;
 }
 #login_wrap main #loginFrm fieldset .login_title h2:nth-child(2) a > span::before {
     background-position-y: -63px;
@@ -62,7 +48,7 @@
 #login_wrap main #loginFrm fieldset .login_title h2 a > em {}
 #login_wrap main #loginFrm fieldset .login_title h2 a > .popup {
     position: absolute; left: 50%;
-    width: max-content;
+    width: max-content; z-index: 9999;
     transform: translate(-50%, -21px);
     background-color: #fff; border: 2px solid #03c75a;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -75,35 +61,87 @@
     color: #03c75a; font-size: 0.625rem;
 }
 /* 탭 내용 */
-#login_wrap main #loginFrm fieldset .login_container {}
+#login_wrap main #loginFrm fieldset .login_container {
+    background-color: #fff;
+    position: relative; top: -10.5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 16px; padding: 25px 27px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
 /* 탭 내용 - id, 일회용, qr 공통 클래스 */
 #login_wrap main #loginFrm fieldset .login_container .login_c {}
 /* ID로그인 */
 /* ID로그인---아이디, 비밀번호 입력 */
-#login_wrap main #loginFrm fieldset .login_container .id_login {
-    background: cornflowerblue;
+#login_wrap main #loginFrm fieldset .login_container .id_login {}
+#login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex; flex-flow: column nowrap; background-color: #fff;
 }
-#login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_input {}
-#login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_input input {}
-#login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_input #userId {}
+#login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_input span {}
+#login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_input span:first-child {border-bottom: 1px solid #ccc;}
+#login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_input span::before {
+    background-image: url(../images/m_sp_login.png);
+    background-position-y: -190px;
+    background-size: 251px 210px;
+    position: relative; top: 3px; left: 10px;
+    content: ''; display: inline-block;
+    width: 15px; height: 16px;
+}
+#login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_input span:nth-child(1)::before {
+    background-position-x: -88px;
+}
+#login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_input span:nth-child(2)::before {
+    background-position-x: -122px;
+}
+#login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_input input {
+    padding: 13px 16px; padding-right: 0; width: 80%;
+}
+#login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_input input::placeholder {color: #aaa;}
+#login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_input #userId {width: 200px;}
 #login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_input #userPw {}
-#login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_state {}
+#login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_state {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 5px 0;
+}
 /* ID로그인---로그인 상태유지 */
 #login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_state .login_state {}
-#login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_state .login_state input[name*=state] {}
-#login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_state .login_state label[for*=state] {}
+#login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_state .login_state input[name*=state] {display: none;}
+#login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_state .login_state input[name*=state]:checked  + label::before {background-position-y: -155px;}
+#login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_state .login_state label[for*=state]::before {
+    content: ''; display: inline-block;
+    background: url(../images/m_sp_login.png) -229px -80px;
+    background-size: 251px 210px;
+    position: relative; top: 3px;
+    width: 19px; height: 19px; margin-right: 5px;
+}
 /* ID로그인---IP보안 */
 #login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_state .ip_state {}
-#login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_state .ip_state input[name*=state] {}
+#login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_state .ip_state input[name*=state] {display: none;}
 #login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_state .ip_state label[for*=state] {}
 #login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_state .ip_state label[for*=state] .txt {}
-#login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_state .ip_state label[for*=state] .switch_bg {}
-#login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_state .ip_state label[for*=state] .switch_bg .switch {}
+#login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_state .ip_state label[for*=state] .switch_bg {
+    display: inline-block; background-color: #aaa;
+    width: 50px; height: 20px; border-radius: 25px; padding: 2px;
+}
+#login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_state .ip_state label[for*=state] .switch_bg .switch {
+    background: #fff; width: 16px; height: 16px; display: inline-block;
+    border-radius: 50%; transition: transform 0.5s;
+}
+#login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_state .ip_state input[name*=state]:checked + label[for*=state] .switch_bg .switch {
+    transform: translateX(30px);
+}
+#login_wrap main #loginFrm fieldset .login_container .id_login .id_pw_state .ip_state input[name*=state]:checked + label[for*=state] .switch_bg {background: #03c75a;}
 /* ID로그인---error message */
 #login_wrap main #loginFrm fieldset .login_container .id_login .error_message {}
 /* ID로그인---로그인 버튼 */
 #login_wrap main #loginFrm fieldset .login_container .id_login .login_btn_wrap {}
-#login_wrap main #loginFrm fieldset .login_container .id_login .login_btn_wrap #loginBtn {}
+#login_wrap main #loginFrm fieldset .login_container .id_login .login_btn_wrap #loginBtn {
+    width: 100%; background-color: #03c75a; color: #fff; border-radius: 5px;
+    padding: 16px 0; margin-top: 20px;
+}
 /* 일회용번호 */
 #login_wrap main #loginFrm fieldset .login_container .disposable_login {
     background-color: pink;
