@@ -5,24 +5,44 @@
 // 3. QR코드을 클릭하면 로그인 내용x, 일회용 내용 x, QR코드 내용 o
 // 제목 변수
 const login_title = document.querySelectorAll('.login_title h2 > a')
-// 통합 내용 변수
-const login_c = document.querySelectorAll('.login_c')
+// 내용 변수
+const id_login_container = document.querySelector('.login_container .id_login')
+const disposable_login_container = document.querySelector('.login_container .disposable_login')
+const qr_login_container = document.querySelector('.login_container .qr_login')
+console.log(login_title[0])
+console.log(id_login_container)
+console.log(disposable_login_container)
+console.log(qr_login_container)
 
-const login_c_hide = ()=>{for(let i of login_c){i.style.display = 'none'}}
-login_c_hide()
-login_c[0].style.display = 'block'
-
-const login_title_hide = ()=>{for(let j of login_title){j.parentElement.classList.remove('active')}}
-login_title_hide()
+// 초기 일회용, QR 내용 숨기기
+disposable_login_container.style.display = 'none'
+qr_login_container.style.display = 'none'
+// 초기값 ID로그인 활성화 시키기 (acitve) *클릭 전
 login_title[0].parentElement.classList.add('active')
 
-login_title.forEach((t,i)=>{
-    t.addEventListener('click', ()=>{
-        login_c_hide()
-        login_title_hide()
-        login_c[i].style.display = 'block'
-        login_title[i].parentElement.classList.add('active')
-    })
+login_title[0].addEventListener('click', ()=>{
+    id_login_container.style.display = 'block'
+    disposable_login_container.style.display = 'none'
+    qr_login_container.style.display = 'none'
+    login_title[0].parentElement.classList.add('active')
+    login_title[1].parentElement.classList.remove('active')
+    login_title[2].parentElement.classList.remove('active')
+})
+login_title[1].addEventListener('click', ()=>{
+    id_login_container.style.display = 'none'
+    disposable_login_container.style.display = 'block'
+    qr_login_container.style.display = 'none'
+    login_title[0].parentElement.classList.remove('active')
+    login_title[1].parentElement.classList.add('active')
+    login_title[2].parentElement.classList.remove('active')
+})
+login_title[2].addEventListener('click', ()=>{
+    id_login_container.style.display = 'none'
+    disposable_login_container.style.display = 'none'
+    qr_login_container.style.display = 'block'
+    login_title[0].parentElement.classList.remove('active')
+    login_title[1].parentElement.classList.remove('active')
+    login_title[2].parentElement.classList.add('active')
 })
 
 //========================================================
